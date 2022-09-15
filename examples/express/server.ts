@@ -1,8 +1,11 @@
 import express from "express";
 import { getGraphQLParameters, processRequest, renderGraphiQL, sendResult, shouldRenderGraphiQL } from "graphql-helix";
 import { schema } from "./schema";
+import cors from 'cors'
 
 const app = express();
+
+app.use(cors())
 
 app.use(express.json());
 
@@ -27,7 +30,7 @@ app.use("/graphql", async (req, res) => {
       schema,
     });
 
-    sendResult(result, res);
+    sendResult(result, res, (r => ({...r, extensions: {hello: 'test'}})));
   }
 });
 

@@ -48,8 +48,46 @@ export const schema = new GraphQLSchema({
               resolve: () =>
                 new Promise((resolve) =>
                   setTimeout(
-                    () => resolve("Next time won't you sing with me?"),
+                    () => {
+                      resolve("Next time won't you sing with me?");
+                    },
+                    1000
+                  )
+                ),
+            },
+            thirdVerse: {
+              type: GraphQLString,
+              resolve: () =>
+                new Promise((resolve) =>
+                  setTimeout(
+                    () => {
+                      resolve("No... I will not!");
+                    },
                     5000
+                  )
+                ),
+            },
+            fourth: {
+              type: GraphQLString,
+              resolve: () =>
+                new Promise((resolve) =>
+                  setTimeout(
+                    () => {
+                      resolve("Ok, maybe. But only if you pick a different song");
+                    },
+                    5500
+                  )
+                ),
+            },
+            five: {
+              type: GraphQLString,
+              resolve: () =>
+                new Promise((resolve) =>
+                  setTimeout(
+                    () => {
+                      resolve("Ok, maybe. But only if you pick a different song");
+                    },
+                    10000
                   )
                 ),
             },
