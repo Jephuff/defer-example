@@ -1,9 +1,11 @@
 import {
+  GraphQLBoolean,
   GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
+  
 } from "graphql";
 
 export const schema = new GraphQLSchema({
@@ -39,6 +41,34 @@ export const schema = new GraphQLSchema({
         type: new GraphQLObjectType({
           name: "Song",
           fields: () => ({
+            verse: {
+              args: {
+                delay: {
+                  type: GraphQLInt,
+                },
+                throw: {
+                  type: GraphQLBoolean,
+                },
+              },
+              type: GraphQLString,
+              resolve: (_source, args) => {
+                const delay: number = args.delay ?? 0
+                return new Promise((resolve, reject) =>
+                  setTimeout(
+                    () => {
+                      if(args.throw) {
+                        reject( new Error(`delayed ${delay}.`))
+                      } else {
+                        resolve(`delayed ${delay}.`);
+                      }
+                      
+                    },
+                    delay
+                  )
+                )
+              },
+            },
+
             firstVerse: {
               type: GraphQLString,
               resolve: () => "Now I know my ABC's.",

@@ -14,6 +14,7 @@
     "website"
   ],
   "scripts": {
+    "start": "yarn && cd examples/express && npm start",
     "prepare": "yarn husky install",
     "prerelease": "yarn build",
     "release": "changeset publish",
